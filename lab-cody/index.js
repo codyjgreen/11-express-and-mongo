@@ -5,8 +5,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const shimmy = require('./api/wuapi');
 
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/test');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
 
 // const wuRoutes = require('./routes/tigerStyle');
 

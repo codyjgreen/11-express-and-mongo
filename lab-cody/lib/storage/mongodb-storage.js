@@ -1,16 +1,25 @@
 'use strict';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
 const WuTang = require('../../models/wu');
+
+mongoose.connect('mongodb://localhost/test')
+.then(() => {
+    console.info('yep its up and running');
+}).catch (
+    (error => {
+        console.error(`error on connection ${error}`);
+    })
+)
+
 
 
 function save(wuTang) {
     let wuMember = new WuTang({
-        name: wuMember.name,
-        lyric: wuMember.lyric,
-        chambers: wuMember.chambers,
+        name: wuTang.name,
+        lyric: wuTang.lyric,
+        chambers: wuTang.chambers,
     })
     return new Promise((resolve, reject)=> {
         wuMember.save((err, savedWu)=> {
@@ -35,6 +44,14 @@ function getAll() {
     });
 }
 
+function update(id, WuTang) {
+    return new Promise((resolve, reject) => {
+      WuTang.findOneAndUpdate(id, wuMember, (err, wuMember) => {
+        resolve(wuMember);
+      });
+    });
+  }
+
 function remove(id) {
     return new Promise((resolve, reject)=> {
         WuTang.remove({_id: id}, (err, wuMember)=> {
@@ -51,4 +68,4 @@ function removeAll() {
     });
 }
 
-module.exports = {save, get, getAll, remove, removeAll};
+module.exports = {save, get, getAll, remove, removeAll,update};
