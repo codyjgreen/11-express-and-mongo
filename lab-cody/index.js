@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/test');
 
 app.use(bodyParser.json());
 
-app.use('/api/theWu', shimmy);
+app.use('/api/theWu', shimmy); 
 
 
 
