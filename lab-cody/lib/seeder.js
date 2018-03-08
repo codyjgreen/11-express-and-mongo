@@ -1,6 +1,16 @@
 'use strict';
-const mongodb = require('./mongodb-storage');
-const WuTang = require('../../models/wu');
+const mongoose = require('mongoose');
+const mongodb = require('./storage');
+const WuTang = require('../models/wu');
+
+mongoose.connect('mongodb://localhost/test')
+.then(() => {
+    console.info('yep its up and running');
+}).catch (
+    (error => {
+        console.error(`error on connection ${error}`); 
+    })
+)
 
 function cream(storage) {
     return storage.removeAll()
@@ -13,8 +23,10 @@ function cream(storage) {
             storage.save(new WuTang({name: 'Raekwon', lyric:'A young youth, rocking the gold tooth, \'Lo goose Only way I begin to G off was drug loot Figured out I went the wrong route So I got with a sick-a** clique and went all out Catching keys from across seas Rolling in MPV\'s every week we made forty G\'s', chambers: 36})),
             storage.save(new WuTang({name: 'GZA', lyric:'This Witty Unpredictable shot is critical To analytical analogy, insurance policies why Said he know that sounds define the note Couldn\'t recognize, blast him the f*** behind the ropes', chambers: 36})),
 
+            console.log(storage)
+
         ])
     });
 }
 
-module.exports = {mongodb, cream};
+module.exports = {mongodb, cream}; 

@@ -2,68 +2,72 @@
 
 const mongoose = require('mongoose');
 
-const WuTang = require('../../models/wu');
+const WuTang = require('../models/wu');
+
+// const cream = require('./storage');
 
 mongoose.connect('mongodb://localhost/test')
 .then(() => {
-    console.info('yep its up and running');
+    console.info('as you wish!');
 }).catch (
     (error => {
-        console.error(`error on connection ${error}`);
+        console.error(`error on connection ${error}`); 
     })
 )
 
 
 
 function save(wuTang) {
-    let wuMember = new WuTang({
+    let wuModel = new WuTang({
         name: wuTang.name,
         lyric: wuTang.lyric,
         chambers: wuTang.chambers,
-    })
+    });
     return new Promise((resolve, reject)=> {
-        wuMember.save((err, savedWu)=> {
+        wuModel.save((err, savedWu)=> {
             resolve(savedWu);
+        });
+    });
+}
+
+
+function getAll() {
+    return new Promise((resolve, reject)=> {
+        WuTang.find((err, members) =>{
+            resolve(members);
         })
     });
 }
 
 function get(id) {
     return new Promise((resolve, reject)=> {
-        WuTang.findOne({_id: id}, (err, wuMember)=> {
-            resolve(wuMember);
+        WuTang.findOne({_id: id}, (err, member)=> {
+            resolve(member);
         })
     });
 }
 
-function getAll() {
-    return new Promise((resolve, reject)=> {
-        WuTang.find((err, wuMember) =>{
-            resolve(wuMember);
-        })
-    });
-}
 
-function update(id, WuTang) {
+function update(id, member) {
     return new Promise((resolve, reject) => {
-      WuTang.findOneAndUpdate(id, wuMember, (err, wuMember) => {
-        resolve(wuMember);
+      WuTang.findOneAndUpdate(id, member, (err, member) => {
+        resolve(member);
       });
     });
   }
 
 function remove(id) {
     return new Promise((resolve, reject)=> {
-        WuTang.remove({_id: id}, (err, wuMember)=> {
-            resolve(wuMember)
+        WuTang.remove({_id: id}, (err, member)=> {
+            resolve(member)
         })
     });
 }
 
 function removeAll() {
     return new Promise((resolve, reject)=> {
-        WuTang.remove((err, wuMember) => {
-            resolve(wuMember);
+        WuTang.remove((err, members) => {
+            resolve(members);
         })
     });
 }

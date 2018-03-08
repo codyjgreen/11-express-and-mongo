@@ -1,22 +1,21 @@
 'use strict';
 
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
-const shimmy = require('./api/wuapi');
-
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
-// const wuRoutes = require('./routes/tigerStyle');
+const app = express();
+
+const routes = require('./routes/wuroutes');
+
 
 app.use(bodyParser.json());
 
-app.use('/api/theWu', shimmy); 
+app.use('/api/theWu', routes); 
 
 
 
 let PORT =process.env.PORT || 3000;
 app.listen(PORT, () =>{
     console.log('http://localhost:' + PORT);
-});
+}); 
