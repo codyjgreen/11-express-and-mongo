@@ -70,27 +70,7 @@ router.post('/', (req, res) => {
       });
   });
 
-
-//   router.put('/', (req, res) => {
-//     let id = req.query.id;
-//     storage.get(id)
-//     .then(WuTang => {
-//       if (req.body.name) {
-//         WuTang.name = req.body.name;
-//       }
-//       if (req.body.lyric) {
-//         WuTang.lyric = req.body.lyric;
-//       }
-//       if (req.body.chambers) {
-//         WuTang.chambers = req.body.chambers;
-//       }
-     
-  
-//       WuTang.save((err, WuTang) => {
-//         res.send(wuMember);
-//       })
-//     });
-//   });
+ 
 
 
 

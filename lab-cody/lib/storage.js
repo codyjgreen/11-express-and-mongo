@@ -64,12 +64,5 @@ function remove(id) {
     });
 }
 
-function removeAll() {
-    return new Promise((resolve, reject)=> {
-        WuTang.remove((err, members) => {
-            resolve(members);
-        })
-    });
-}
 
-module.exports = {save, get, getAll, remove, removeAll,update};
+module.exports = {save, get, getAll, remove ,update};
